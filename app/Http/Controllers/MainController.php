@@ -18,7 +18,6 @@ class MainController extends Controller
 
     public function category($category)
     {
-
         return view('category', compact('category'));
     }
 

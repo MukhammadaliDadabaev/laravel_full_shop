@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Интернет Магазин: Товар</title>
+  <title>Интернет Магазин: Все Категории</title>
 
   <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
   <script src="/js/jquery.min.js"></script>
@@ -26,7 +26,7 @@
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a href="http://127.0.0.1:8000">Все товары</a></li>
-          <li><a href="http://127.0.0.1:8000/categories">Категории</a>
+          <li class="active"><a href="http://127.0.0.1:8000/categories">Категории</a>
           </li>
           <li><a href="http://127.0.0.1:8000/basket">В корзину</a></li>
           <li><a href="http://127.0.0.1:8000/reset">Сбросить проект в начальное состояние</a></li>
@@ -43,8 +43,9 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="http://127.0.0.1:8000/login">Войти</a></li>
 
+          <li><a href="http://127.0.0.1:8000/admin/orders">Панель администратора</a></li>
+          <li><a href="http://127.0.0.1:8000/logout">Выйти</a></li>
         </ul>
       </div>
     </div>
@@ -52,21 +53,33 @@
 
   <div class="container">
     <div class="starter-template">
-      <h1>iPhone Y</h1>
-      <h2>Портативная техника</h2>
-      <p>Цена: <b>46264 ₽</b></p>
-
-      <h4>Цвет: Серебристый</h4>
-      <h4>Внутренняя память: 32гб</h4>
-
-      <img src="http://localhost/storage/products/KdSSTgXPwtM96AKBV7hacbJX9WSMmc2g96mrdcL9.jpg">
-      <p>Отличный продвинутый book</p>
-
-      <form action="http://127.0.0.1:8000/basket/add/1" method="POST">
-        <button type="submit" class="btn btn-success" role="button">Добавить в корзину</button>
-
-        <input type="hidden" name="_token" value="A3rX0ddMsecib9HmuR3Az1AftjqfH78PKo6sVLdP">
-      </form>
+      <div class="panel">
+        <a href="/mobiles">
+          <img src="http://localhost/storage/categories/mobile.jpg">
+          <h2>Мобильные телефоны</h2>
+        </a>
+        <p>
+          В этом разделе вы найдёте самые популярные мобильные телефонамы по отличным ценам!
+        </p>
+      </div>
+      <div class="panel">
+        <a href="/portable">
+          <img src="http://localhost/storage/categories/portable.jpg">
+          <h2>Портативная техника</h2>
+        </a>
+        <p>
+          Раздел с портативной техникой.
+        </p>
+      </div>
+      <div class="panel">
+        <a href="/appliances">
+          <img src="http://localhost/storage/categories/appliance.jpg">
+          <h2>Бытовая техника</h2>
+        </a>
+        <p>
+          Раздел с бытовой техникой
+        </p>
+      </div>
     </div>
   </div>
 

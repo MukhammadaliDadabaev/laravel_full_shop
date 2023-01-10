@@ -19,4 +19,5 @@ Route::get('/categories', [MainController::class, 'categories']);
 Route::get('/{category}', [MainController::class, 'category']);
 Route::get('/basket', [MainController::class, 'basket']);
 
-Route::get('/product/{product?}', [MainController::class, 'product']);
+Route::get('/mobiles/{product}', [MainController::class, 'product']);
+// Route::get('/product/{product?}', [MainController::class, 'product']);
