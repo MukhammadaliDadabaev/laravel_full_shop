@@ -53,33 +53,18 @@
 
   <div class="container">
     <div class="starter-template">
+
+      @foreach ($categories as $category )
       <div class="panel">
-        <a href="/mobiles">
+        <a href="/{{ $category->code }}">
           <img src="http://localhost/storage/categories/mobile.jpg">
-          <h2>Мобильные телефоны</h2>
+          <h2>{{ $category->name }}</h2>
         </a>
         <p>
-          В этом разделе вы найдёте самые популярные мобильные телефонамы по отличным ценам!
-        </p>
+          {{ $category->description }}
       </div>
-      <div class="panel">
-        <a href="/portable">
-          <img src="http://localhost/storage/categories/portable.jpg">
-          <h2>Портативная техника</h2>
-        </a>
-        <p>
-          Раздел с портативной техникой.
-        </p>
-      </div>
-      <div class="panel">
-        <a href="/appliances">
-          <img src="http://localhost/storage/categories/appliance.jpg">
-          <h2>Бытовая техника</h2>
-        </a>
-        <p>
-          Раздел с бытовой техникой
-        </p>
-      </div>
+      @endforeach
+
     </div>
   </div>
 
