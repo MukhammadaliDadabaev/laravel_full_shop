@@ -16,9 +16,8 @@
       <p>
       <form action="{{ route('basket') }}" method="POST">
         @csrf
-        {{ $product->category->name }}
         <button type="submit" class="btn btn-primary" role="button">В корзину</button>
-        <a href="http://127.0.0.1:8000/portable/iphone_y/1" class="btn btn-default" role="button">Подробнее</a>
+        <a href="{{ route('product',[$product->category->code, $product->code]) }}" class="btn btn-default" role="button">Подробнее</a>
         <input type="hidden" name="_token" value="A3rX0ddMsecib9HmuR3Az1AftjqfH78PKo6sVLdP">
       </form>
       </p>

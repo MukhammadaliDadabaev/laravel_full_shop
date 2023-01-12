@@ -5,7 +5,7 @@
 @section('content')
 <div class="starter-template">
   <h1>
-    {{ $category->name }}
+    {{ $category->name }} {{ $category->products->count() }}
   </h1>
   <p>
     {{ $category->description }}

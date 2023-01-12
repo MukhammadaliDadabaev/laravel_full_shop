@@ -23,9 +23,7 @@ class MainController extends Controller
     public function category($code)
     {
         $category = Category::where('code', $code)->first();
-        // filter product
-        $products = Product::where('category_id', $category->id)->get();
-        return view('category', compact('category', 'products'));
+        return view('category', compact('category'));
     }
 
     public function product($category, $product = null)
