@@ -33,6 +33,7 @@ span.badge.badge-success {
 }
 
 span.badge.badge-warning {
+    margin: 1px 0;
     color: #fff;
     background-color: #dc3545;
 }

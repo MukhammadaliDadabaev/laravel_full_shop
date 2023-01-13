@@ -17,28 +17,32 @@
         </tr>
       </thead>
       <tbody>
+
+        @foreach ($order->products as $product)
         <tr>
           <td>
-            <a href="http://127.0.0.1:8000/portable/iphone_y/5">
+            <a href="{{ route('product',[$product->category->code, $product->code]) }}">
               <img height="56px" src="http://localhost/storage/products/KdSSTgXPwtM96AKBV7hacbJX9WSMmc2g96mrdcL9.jpg">
-              iPhone Y
+              {{ $product->name }}
             </a>
           </td>
           <td><span class="badge">1</span>
             <div class="btn-group form-inline">
-              <form action="http://127.0.0.1:8000/basket/remove/5" method="POST">
+              <form action="{{ route('basket-add', $product) }}" method="POST">
+                @csrf
                 <button type="submit" class="btn btn-danger" href=""><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
-                <input type="hidden" name="_token" value="A3rX0ddMsecib9HmuR3Az1AftjqfH78PKo6sVLdP">
               </form>
-              <form action="http://127.0.0.1:8000/basket/add/5" method="POST">
+              <form action="{{ route('basket-add', $product) }}" method="POST">
+                @csrf
                 <button type="submit" class="btn btn-success" href=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                <input type="hidden" name="_token" value="A3rX0ddMsecib9HmuR3Az1AftjqfH78PKo6sVLdP">
               </form>
             </div>
           </td>
-          <td>46264 ₽</td>
-          <td>46264 ₽</td>
+          <td>{{ $product->price }} ₽</td>
+          <td>{{ $product->price }} ₽</td>
         </tr>
+        @endforeach
+
         <tr>
           <td colspan="3">Общая стоимость:</td>
           <td>46264 ₽</td>

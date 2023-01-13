@@ -14,11 +14,10 @@
       <!-- <h4>Внутренняя память: 32гб</h4> -->
       <p>{{ $product->price }}</p>
       <p>
-      <form action="{{ route('basket') }}" method="POST">
+      <form action="{{ route('basket-add', $product) }}" method="POST">
         @csrf
         <button type="submit" class="btn btn-primary" role="button">В корзину</button>
         <a href="{{ route('product',[$product->category->code, $product->code]) }}" class="btn btn-default" role="button">Подробнее</a>
-        <input type="hidden" name="_token" value="A3rX0ddMsecib9HmuR3Az1AftjqfH78PKo6sVLdP">
       </form>
       </p>
     </div>
