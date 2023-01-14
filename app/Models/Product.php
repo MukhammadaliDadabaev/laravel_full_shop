@@ -28,8 +28,11 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function order()
+    public function getPriceForCount()
     {
-        return $this->belongsTo(Order::class);
+        if (!is_null($this->pivot)) {
+            return $this->pivot->count * $this->price;
+        }
+        return $this->price;
     }
 }
