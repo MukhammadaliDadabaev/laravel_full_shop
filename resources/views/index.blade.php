@@ -1,12 +1,12 @@
-@extends('main')
+@extends('layouts.main')
 
 @section('title', 'Home')
 
 @section('content')
 
-<div class="starter-template">
-  <h1>Все товары</h1>
-  <!-- <form method="GET" action="http://127.0.0.1:8000">
+
+<h1>Все товары</h1>
+<!-- <form method="GET" action="http://127.0.0.1:8000">
     <div class="filters row">
       <div class="col-sm-6 col-md-3">
         <label for="price_from">Цена от <input type="text" name="price_from" id="price_from" size="6" value="">
@@ -33,15 +33,15 @@
     </div>
   </form> -->
 
-  <div class="row">
-    @foreach ($products as $product)
+<div class="row">
+  @foreach ($products as $product)
 
-    @include('card', compact('product'))
+  @include('layouts.card', compact('product'))
 
-    @endforeach
-  </div>
+  @endforeach
+</div>
 
-  <!-- <nav>
+<!-- <nav>
     <ul class="pagination">
 
       <li class="page-item disabled" aria-disabled="true" aria-label="pagination.previous">
@@ -60,6 +60,6 @@
     </ul>
   </nav> -->
 
-</div>
+
 
 @endsection

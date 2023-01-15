@@ -1,24 +1,23 @@
-@extends('main')
+@extends('layouts.main')
 
 @section('title', 'Category ' . $category->name)
 
 @section('content')
-<div class="starter-template">
-  <h1>
-    {{ $category->name }} {{ $category->products->count() }}
-  </h1>
-  <p>
-    {{ $category->description }}
-  </p>
 
-  <div class="row">
-    @foreach ($category->products as $product)
+<h1>
+  {{ $category->name }} {{ $category->products->count() }}
+</h1>
+<p>
+  {{ $category->description }}
+</p>
 
-    @include('card', compact('product'))
+<div class="row">
+  @foreach ($category->products as $product)
 
-    @endforeach
-  </div>
+  @include('card', compact('product'))
 
+  @endforeach
 </div>
+
 
 @endsection

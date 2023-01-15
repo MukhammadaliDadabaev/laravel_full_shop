@@ -29,4 +29,30 @@ class Order extends Model
 
         return $sum;
     }
+
+    public function saveOrder($name, $phone)
+    {
+        if ($this->status == 0) {
+            $this->name = $name;
+            $this->phone = $phone;
+            $this->status = 1;
+            // $this->sum = $this->getFullSum();
+
+            // $skus = $this->skus;
+            $this->save();
+            session()->forget('orderId');
+            return true;
+        } else {
+            return false;
+        }
+        // foreach ($skus as $skuInOrder) {
+        //     $this->skus()->attach($skuInOrder, [
+        //         'count' => $skuInOrder->countInOrder,
+        //         'price' => $skuInOrder->price,
+        //     ]);
+        // }
+
+        // session()->forget('order');
+        // return true;
+    }
 }
