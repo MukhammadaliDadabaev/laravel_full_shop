@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BasketController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,24 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
+Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
+
+Route::get('/login', [LoginController::class, 'create'])->middleware('guest')->name('login');
+Route::post('/login', [LoginController::class, 'store'])->middleware('guest');
+Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth')->name('get-logout');
+
+// Route::view('/home', 'home')->middleware('auth')->name('home');
+
+// Route::get('/register', [RegisterController::class, 'create'])->name('register');
+// Route::post('/register', [RegisterController::class, 'store']);
+// Route::get('/login', [LoginController::class, 'create'])->name('login');
+// Route::post('/login', [LoginController::class, 'store']);
+// Route::post('/logout', [LoginController::class, 'destroy'])->name('get-logout');
+
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/', [MainController::class, 'index'])->name('index');
 Route::get('/categories', [MainController::class, 'categories'])->name('categories');

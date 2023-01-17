@@ -30,6 +30,14 @@
           </li>
           <li><a href="{{ route('basket') }}">В корзину</a></li>
           <li><a href="{{ route('index') }}">Сбросить проект в начальное состояние</a></li>
+          @guest
+          <li><a href="{{ route('login') }}">Администратор</a></li>
+          @endguest
+
+          @auth
+          <li><a href="{{ route('login') }}">Администратор</a></li>
+          <li><a href="{{ route('get-logout') }}">Выйти</a></li>
+          @endauth
           <li><a href="http://127.0.0.1:8000/locale/en">en</a></li>
 
           <li class="dropdown">
