@@ -10,6 +10,11 @@ use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
+  // public function redirectTo()
+  // {
+  //   return route('home');
+  // }
+
   public function create()
   {
     return view('auth.login');
@@ -30,7 +35,7 @@ class LoginController extends Controller
       ]);
     }
 
-    $request->session->regenerate();
+    // $request->session->regenerate();
 
     return redirect()->intended(RouteServiceProvider::HOME);
   }
@@ -39,9 +44,9 @@ class LoginController extends Controller
   {
     Auth::logout();
 
-    $request->session->invalidate();
-    $request->session->regenerateToken();
+    // $request->session->invalidate();
+    // $request->session->regenerateToken();
 
-    return redirect()->route('index');
+    return redirect()->route('/home');
   }
 }

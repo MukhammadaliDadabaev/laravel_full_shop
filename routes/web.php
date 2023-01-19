@@ -3,8 +3,8 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BasketController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,9 +32,12 @@ Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth')-
 // Route::get('/login', [LoginController::class, 'create'])->name('login');
 // Route::post('/login', [LoginController::class, 'store']);
 // Route::post('/logout', [LoginController::class, 'destroy'])->name('get-logout');
+// , 'namespace' => 'Admin'
 
+Route::group(['middleware' => 'auth'], function () {
+  Route::get('/orders', [OrderController::class, 'index'])->name('home');
+});
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/', [MainController::class, 'index'])->name('index');
 Route::get('/categories', [MainController::class, 'categories'])->name('categories');

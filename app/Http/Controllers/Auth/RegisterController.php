@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+    // public function redirectTo()
+    // {
+    //     return route('home');
+    // }
+
     public function create()
     {
         return view('auth.register');
