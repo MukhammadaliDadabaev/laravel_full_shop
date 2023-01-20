@@ -12,7 +12,7 @@ class LoginController extends Controller
 {
   // public function redirectTo()
   // {
-  //   return route('home');
+  //   return route('/home');
   // }
 
   public function create()
@@ -23,6 +23,7 @@ class LoginController extends Controller
   public function store(Request $request)
   {
     $credentials = $request->validate([
+      // 'name' => ['required', 'string'],
       'email' => ['required', 'string', 'email'],
       'password' => ['required', 'string'],
     ]);
@@ -47,6 +48,6 @@ class LoginController extends Controller
     // $request->session->invalidate();
     // $request->session->regenerateToken();
 
-    return redirect()->route('/home');
+    return redirect()->route('home');
   }
 }

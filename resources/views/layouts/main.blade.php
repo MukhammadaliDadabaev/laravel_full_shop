@@ -36,7 +36,7 @@
 
           @auth
           <li><a href="{{ route('home') }}">Администратор</a></li>
-          <li><a href="{{ route('get-logout') }}">Выйти</a></li>
+          <li><a href="{{ route('logout') }}">Выйти</a></li>
           @endauth
           <li><a href="http://127.0.0.1:8000/locale/en">en</a></li>
 

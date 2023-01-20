@@ -23,30 +23,33 @@ Route::post('/register', [RegisterController::class, 'store'])->middleware('gues
 
 Route::get('/login', [LoginController::class, 'create'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'store'])->middleware('guest');
-Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth')->name('get-logout');
+Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth')->name('logout');
 
-// Route::view('/home', 'home')->middleware('auth')->name('home');
-
-// Route::get('/register', [RegisterController::class, 'create'])->name('register');
-// Route::post('/register', [RegisterController::class, 'store']);
-// Route::get('/login', [LoginController::class, 'create'])->name('login');
-// Route::post('/login', [LoginController::class, 'store']);
-// Route::post('/logout', [LoginController::class, 'destroy'])->name('get-logout');
-// , 'namespace' => 'Admin'
-
-Route::group(['middleware' => 'auth'], function () {
-  Route::get('/orders', [OrderController::class, 'index'])->name('home');
+// AUTH-group
+Route::group(['middleware' => 'auth', 'namespace' => 'Admin'], function () {
+  // USER admin-group
+  Route::group(['middleware' => 'is_admin'], function () {
+    Route::get('/orders', [OrderController::class, 'index'])->name('home');
+  });
 });
 
 
 Route::get('/', [MainController::class, 'index'])->name('index');
 Route::get('/categories', [MainController::class, 'categories'])->name('categories');
 
-Route::get('/basket', [BasketController::class, 'basket'])->name('basket');
-Route::get('/basket/place', [BasketController::class, 'basketPlace'])->name('basket-place');
-Route::post('/basket/add/{id}', [BasketController::class, 'basketAdd'])->name('basket-add');
-Route::post('/basket/remove/{id}', [BasketController::class, 'basketRemove'])->name('basket-remove');
-Route::post('/basket/place', [BasketController::class, 'basketConfirm'])->name('basket-confirm');
+Route::group(['prefix' => 'basket'], function () {
+  Route::post('/add/{id}', [BasketController::class, 'basketAdd'])->name('basket-add');
+  // Tavar
+  Route::group(['middleware' => 'basket_not_empty', 'prefix' => 'basket'], function () {
+    Route::get('/', [BasketController::class, 'basket'])->name('basket');
+    Route::get('/place', [BasketController::class, 'basketPlace'])->name('basket-place');
+    Route::post('/remove/{id}', [BasketController::class, 'basketRemove'])->name('basket-remove');
+    Route::post('/place', [BasketController::class, 'basketConfirm'])->name('basket-confirm');
+  });
+});
+
+
+
 
 Route::get('/{category}', [MainController::class, 'category'])->name('category');
 Route::get('/{category}/{product}', [MainController::class, 'product'])->name('product');
