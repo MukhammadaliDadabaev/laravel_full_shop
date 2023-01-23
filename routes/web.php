@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BasketController;
@@ -26,26 +27,31 @@ Route::post('/login', [LoginController::class, 'store'])->middleware('guest');
 Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth')->name('logout');
 
 // AUTH-group
-Route::group(['middleware' => 'auth', 'namespace' => 'Admin'], function () {
-  // USER admin-group
-  Route::group(['middleware' => 'is_admin'], function () {
-    Route::get('/orders', [OrderController::class, 'index'])->name('home');
-  });
+Route::group([
+    'middleware' => 'auth',
+    //'namespace' => 'Admin',
+    'prefix' => 'admin'
+], function () {
+    //-----------------> USER admin-group
+    Route::group(['middleware' => 'is_admin'], function () {
+        Route::get('/orders', [OrderController::class, 'index'])->name('home');
+    });
+    // Resource 
+    Route::resource('categories', CategoryController::class);
 });
-
 
 Route::get('/', [MainController::class, 'index'])->name('index');
 Route::get('/categories', [MainController::class, 'categories'])->name('categories');
 
 Route::group(['prefix' => 'basket'], function () {
-  Route::post('/add/{id}', [BasketController::class, 'basketAdd'])->name('basket-add');
-  // Tavar
-  Route::group(['middleware' => 'basket_not_empty', 'prefix' => 'basket'], function () {
-    Route::get('/', [BasketController::class, 'basket'])->name('basket');
-    Route::get('/place', [BasketController::class, 'basketPlace'])->name('basket-place');
-    Route::post('/remove/{id}', [BasketController::class, 'basketRemove'])->name('basket-remove');
-    Route::post('/place', [BasketController::class, 'basketConfirm'])->name('basket-confirm');
-  });
+    Route::post('/add/{id}', [BasketController::class, 'basketAdd'])->name('basket-add');
+    // Tavar
+    Route::group(['middleware' => 'basket_not_empty', 'prefix' => 'basket'], function () {
+        Route::get('/', [BasketController::class, 'basket'])->name('basket');
+        Route::get('/place', [BasketController::class, 'basketPlace'])->name('basket-place');
+        Route::post('/remove/{id}', [BasketController::class, 'basketRemove'])->name('basket-remove');
+        Route::post('/place', [BasketController::class, 'basketConfirm'])->name('basket-confirm');
+    });
 });
 
 

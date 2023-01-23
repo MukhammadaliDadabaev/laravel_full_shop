@@ -17,16 +17,25 @@ class BasketIsNotEmpty
      */
     public function handle(Request $request, Closure $next)
     {
-        $orderId = session('orderId');
+        // $orderId = session('orderId');
 
-        if (!is_null($orderId)) {
-            $order = Order::findOrFail($orderId);
-            if ($order->products->count() == 0) {
-                session()->flash('warning', 'Tavar not...❌');
-                return redirect()->route('index');
-            }
+        // if (is_null($orderId)) {
+        //     $order = Order::findOrFail($orderId);
+        //     if ($order->products->count() == 0) {
+        //         session()->flash('warning', 'Tavar not...❌');
+        //         return redirect()->route('index');
+        //     }
+        // }
+        // return $next($request);
+
+        $order = session('order');
+
+        if (!is_null($order) && $order->getFullSum() > 0) {
+            return $next($request);
         }
 
-        return $next($request);
+        session()->forget('order');
+        session()->flash('warning', 'Tavar not...❌');
+        return redirect()->route('index');
     }
 }
