@@ -12,7 +12,7 @@
 <h4>Цвет: Белый</h4>
 <h4>Внутренняя память: 128гб</h4>
 
-<img src="http://localhost/storage/products/iphone_x_silver.jpg">
+<img src="{{ Storage::url($product->image) }}">
 <p>Огромный продвинутый телефон</p>
 
 <form action="http://127.0.0.1:8000/basket/add/2" method="POST">

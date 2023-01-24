@@ -80,7 +80,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        Storage::delete($product->image);
+        // Storage::delete($product->image);
 
         $path = $request->file('image')->store('prod_files');
         $params = $request->all();

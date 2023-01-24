@@ -22,7 +22,7 @@
       <tr>
         <td>
           <a href="{{ route('product',[$product->category->code, $product->code]) }}">
-            <img height="56px" src="http://localhost/storage/products/KdSSTgXPwtM96AKBV7hacbJX9WSMmc2g96mrdcL9.jpg">
+            <img height="56px" src="{{ Storage::url($product->image) }}">
             {{ $product->name }}
           </a>
         </td>
@@ -52,7 +52,8 @@
   <div class="row">
     <div class="form-inline pull-right">
       <form method="POST" action="http://127.0.0.1:8000/basket/coupon">
-        <input type="hidden" name="_token" value="A3rX0ddMsecib9HmuR3Az1AftjqfH78PKo6sVLdP"> <label for="coupon">Добавить купон:</label>
+        @csrf
+        <label for="coupon">Добавить купон:</label>
         <input class="form-control" type="text" name="coupon">
         <button type="submit" class="btn btn-success">Добавить</button>
       </form>

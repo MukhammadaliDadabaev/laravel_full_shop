@@ -7,7 +7,7 @@
 
       <span class="badge badge-danger">Хит</span>
     </div>
-    <img src="http://localhost/storage/products/KdSSTgXPwtM96AKBV7hacbJX9WSMmc2g96mrdcL9.jpg" alt="iPhone Y">
+    <img src="{{ Storage::url($product->image) }}" alt="iPhone Y">
     <div class="caption">
       <h3>{{ $product->name }}</h3>
       <!-- <h4>Цвет: Белый</h4> -->
