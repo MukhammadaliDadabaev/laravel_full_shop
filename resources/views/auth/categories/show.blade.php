@@ -33,7 +33,7 @@
       </tr>
       <tr>
         <td>Картинка</td>
-        <td><img src="http://localhost/storage/categories/mobile.jpg" height="240px"></td>
+        <td><img src="{{ Storage::url($category->image) }}" height="230px"></td>
       </tr>
       <tr>
         <td>Кол-во товаров</td>

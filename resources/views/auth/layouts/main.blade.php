@@ -33,7 +33,7 @@
                     <ul class="nav navbar-nav">
 
                         <li><a href="{{ route('categories.index') }}">Категории</a></li>
-                        <li><a href="">Товары</a>
+                        <li><a href="{{ route('products.index') }}">Товары</a>
                         <li><a href="">Свойства</a>
                         <li><a href="">Купоны</a>
                         <li><a href="">Поставщики</a>

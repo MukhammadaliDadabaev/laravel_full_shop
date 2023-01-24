@@ -10,6 +10,8 @@ use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
+
+  // protected $redirectTo = '/home';
   //protected function redirectTo()
   //{
   // if (Auth::user()->isAdmin()) {
@@ -24,10 +26,10 @@ class LoginController extends Controller
    *
    * @return void
    */
-  public function __construct()
-  {
-    $this->middleware('guest')->except('logout');
-  }
+  // public function __construct()
+  // {
+  //   $this->middleware('guest')->except('logout');
+  // }
 
   public function create()
   {
