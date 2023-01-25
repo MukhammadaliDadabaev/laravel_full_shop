@@ -25,18 +25,23 @@
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="{{ route('index') }}">Все товары</a></li>
-          <li><a href="{{ route('categories') }}">Категории</a>
+          <li @route_active('index')><a href="{{ route('index') }}">Все товары</a></li>
+          <li @route_active('categor*')><a href="{{ route('categories') }}">Категории</a>
           </li>
-          <li><a href="{{ route('basket') }}">В корзину</a></li>
+          <li @route_active('basket*')><a href="{{ route('basket') }}">В корзину</a></li>
           <li><a href="{{ route('index') }}">Сбросить проект в начальное состояние</a></li>
           @guest
-          <li><a href="{{ route('login') }}">Администратор</a></li>
+          <li><a href="{{ route('login') }}">Войти</a></li>
           @endguest
 
           @auth
-          <li><a href="{{ route('home') }}">Администратор</a></li>
-          <li><a href="{{ route('logout') }}">Выйти</a></li>
+          @admin('admin')
+            <li><a href="{{ route('home') }}">Администратор</a></li>
+          @else
+          <li><a href="{{ route('person.orders.index') }}">Мои закази</a></li>
+          @endadmin
+
+          <li><a href="{{ route('get-logout') }}">Выйти</a></li>
           @endauth
           <li><a href="http://127.0.0.1:8000/locale/en">en</a></li>
 
