@@ -40,7 +40,7 @@ Route::group([
     Route::group(['middleware' => 'is_admin'], function () {
         Route::get('/orders', [OrderController::class, 'index'])->name('home');
     });
-    // Resource 
+    //  Resource
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
 });
