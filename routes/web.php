@@ -8,6 +8,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Person\OrderController as PersonOrderController;
+use App\Http\Controllers\ResetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 
 // Route::view('/home', 'home')->middleware('auth');
 // Route::view('/home', 'home');
+
+Route::get('/reset', [ResetController::class, 'reset'])->name('reset');
 
 Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');

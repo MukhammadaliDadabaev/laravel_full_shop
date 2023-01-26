@@ -11,15 +11,15 @@ use Illuminate\Validation\ValidationException;
 class LoginController extends Controller
 {
 
-  // protected $redirectTo = '/home';
-  //protected function redirectTo()
-  //{
-  // if (Auth::user()->isAdmin()) {
-  //   return route('home');
-  //} else {
-  // return route('person.orders.index');
-  //}
-  // }
+  protected $redirectTo = '/home';
+  protected function redirectTo()
+  {
+    if (Auth::user()->isAdmin()) {
+      return route('home');
+    } else {
+      return route('person.orders.index');
+    }
+  }
 
   /**
    * Create a new controller instance.
@@ -28,7 +28,7 @@ class LoginController extends Controller
    */
   public function __construct()
   {
-    $this->middleware('guest')->except('logout');
+    $this->middleware('guest')->except('get-logout');
   }
 
   public function create()
@@ -64,7 +64,7 @@ class LoginController extends Controller
     //$request->session->regenerateToken();
     //return redirect()->route('home');
 
-    if (Auth::user()->is_admin) {
+    if (Auth::user()->isAdmin()) {
       return route('home');
     } else {
       return route('index');

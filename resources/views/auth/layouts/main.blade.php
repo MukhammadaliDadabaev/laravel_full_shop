@@ -31,16 +31,16 @@
 
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        @admin('admin')
+                        {{-- @admin('admin') --}}
                             <li><a href="{{ route('categories.index') }}">Категории</a></li>
                             <li><a href="{{ route('products.index') }}">Товары</a>
-                            @else
+                            {{-- @else --}}
                             <li><a href="">Свойства</a>
                             <li><a href="">Купоны</a>
                             <li><a href="">Поставщики</a>
                             </li>
                             <li><a href="{{ route('home') }}">Заказы</a></li>
-                        @endadmin
+                        {{-- @endadmin --}}
 
                     </ul>
 
