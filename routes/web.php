@@ -22,8 +22,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::view('/home', 'home')->middleware('auth');
-// Route::view('/home', 'home');
 
 Route::get('/reset', [ResetController::class, 'reset'])->name('reset');
 
@@ -32,9 +30,9 @@ Route::post('/register', [RegisterController::class, 'store'])->middleware('gues
 
 Route::get('/login', [LoginController::class, 'create'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'store'])->middleware('guest');
-Route::post('/logout', [LoginController::class, 'destroy'])->name('get-logout');
+Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth')->name('get-logout');
 
-//------------------> MIDDLEWARE-GROUP->middleware('auth')
+//------------------> MIDDLEWARE-GROUP
 Route::middleware(['auth'])->group(function () {
 	//-----------------------> PERSON controller
 	Route::group(['prefix' => 'person', 'as' => 'person.'], function () {

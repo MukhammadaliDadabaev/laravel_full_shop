@@ -20,9 +20,9 @@
 <body>
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
-      <div class="navbar-header">
+      {{-- <div class="navbar-header">
         <a class="navbar-brand" href="{{ route('index') }}">Интернет Магазин</a>
-      </div>
+      </div> --}}
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li @route_active('index')><a href="{{ route('index') }}">Все товары</a></li>
@@ -35,11 +35,11 @@
           @endguest
 
           @auth
-          @admin('admin')
+          {{-- @admin('admin') --}}
             <li><a href="{{ route('home') }}">Администратор</a></li>
-          @else
+          {{-- @else --}}
           <li><a href="{{ route('person.orders.index') }}">Мои закази</a></li>
-          @endadmin
+          {{-- @endadmin --}}
 
           <li><a href="{{ route('get-logout') }}">Выйти</a></li>
           @endauth

@@ -12,6 +12,7 @@ table {
 }
 
 div.thumbnail img {
+    margin-top: 35px;
     max-height: 200px;
 }
 
@@ -21,10 +22,12 @@ div.form-inline form {
 
 div.labels {
     position: absolute;
+    left: 40px;
+    top: 8px;
 }
 
 div.labels span.badge {
-    display: block;
+    display:  inline-block;
 }
 
 span.badge.badge-success {
@@ -33,7 +36,7 @@ span.badge.badge-success {
 }
 
 span.badge.badge-warning {
-    margin: 1px 0;
+    margin: 1px 10px;
     color: #fff;
     background-color: #dc3545;
 }

@@ -23,7 +23,7 @@
       <div class="input-group row">
         <label for="code" class="col-sm-2 col-form-label">Код: </label>
         <div class="col-sm-6">
-          {{-- @include('auth.layouts.error', ['fieldName' => 'code']) --}}
+          @include('auth.layouts.error', ['fieldName' => 'code'])
           <input type="text" class="form-control" name="code" id="code"
             value="@isset($product){{ $product->code }}@endisset">
         </div>
@@ -32,7 +32,7 @@
       <div class="input-group row">
         <label for="name" class="col-sm-2 col-form-label">Название: </label>
         <div class="col-sm-6">
-          {{-- @include('auth.layouts.error', ['fieldName' => 'name']) --}}
+          @include('auth.layouts.error', ['fieldName' => 'name'])
           <input type="text" class="form-control" name="name" id="name"
             value="@isset($product){{ $product->name }}@endisset">
         </div>
@@ -50,7 +50,7 @@
       <div class="input-group row">
         <label for="category_id" class="col-sm-2 col-form-label">Категория: </label>
         <div class="col-sm-6">
-          {{-- @include('auth.layouts.error', ['fieldName' => 'category_id']) --}}
+          @include('auth.layouts.error', ['fieldName' => 'category_id'])
           <select name="category_id" id="category_id" class="form-control">
             @foreach($categories as $category)
             <option value="{{ $category->id }}" @isset($product) @if($product->category_id == $category->id)
@@ -63,7 +63,7 @@
         </div>
       </div>
       <br>
-      {{-- <div class="input-group row">
+      <div class="input-group row">
         <label for="description" class="col-sm-2 col-form-label">Описание: </label>
         <div class="col-sm-6">
           @include('auth.layouts.error', ['fieldName' => 'description'])
@@ -71,7 +71,7 @@
             rows="7">@isset($product){{ $product->description }}@endisset</textarea>
         </div>
       </div>
-      <br> --}}
+      <br>
       {{-- <div class="input-group row">
         <label for="description" class="col-sm-2 col-form-label">Описание en: </label>
         <div class="col-sm-6">
@@ -79,8 +79,8 @@
           <textarea name="description_en" id="description_en" cols="72"
             rows="7">@isset($product){{ $product->description_en }}@endisset</textarea>
         </div>
-      </div>
-      <br> --}}
+      </div> --}}
+      <br>
       <div class="input-group row">
         <label for="image" class="col-sm-2 col-form-label">Картинка: </label>
         <div class="col-sm-10">
@@ -105,9 +105,9 @@
             @endforeach
           </select>
         </div>
-      </div>
-      <br> --}}
-{{-- 
+      </div> --}}
+      <br>
+
       @foreach ([
       'hit' => 'Хит',
       'new' => 'Новинка',
@@ -123,7 +123,7 @@
         </div>
       </div>
       <br>
-      @endforeach --}}
+      @endforeach
       <button class="btn btn-success">Сохранить</button>
     </div>
   </form>
