@@ -12,10 +12,11 @@
 <h4>Цвет: Белый</h4>
 <h4>Внутренняя память: 128гб</h4>
 
-<img src="{{ Storage::url($product->image) }}">
+{{-- <img src="{{ Storage::url($product->image) }}"> --}}
 <p>Огромный продвинутый телефон</p>
 
-<form action="http://127.0.0.1:8000/basket/add/2" method="POST">
+<form action="{{ route('basket-add', $product) }}" method="POST">
+  @csrf
   <button type="submit" class="btn btn-success" role="button">Добавить в корзину</button>
 </form>
 
