@@ -6,11 +6,14 @@ use App\Http\Requests\ProductFiltersRequest;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\Log;
 
 class MainController extends Controller
 {
   public function index(ProductFiltersRequest $request)
   {
+    // Log::info($request->ip());
+    // \Debugbar::info($request);
     //-----> PRODUCT-FILTERS
     $productsQuery = Product::query();
 
