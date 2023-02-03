@@ -37,6 +37,8 @@ class BasketController extends Controller
             session()->flash('warning', 'Tovar olishda xatolik...👇🤔');
         }
 
+        Order::eraseOrderSum();
+
         return redirect()->route('index');
     }
 
@@ -77,7 +79,9 @@ class BasketController extends Controller
         }
 
         $product = Product::find($productId);
-        session()->flash('success', 'Tovar olindi...😎', $product->name);
+        Order::changeFullSum($product->price);
+
+        session()->flash('success', 'Tovar olindi...👉' . $product->name);
 
         return redirect()->route('basket');
     }
@@ -101,7 +105,9 @@ class BasketController extends Controller
         }
 
         $product = Product::find($productId);
-        session()->flash('warning', 'Tovar o\'chirildi...❌', $product->name);
+        Order::changeFullSum(-$product->price);
+
+        session()->flash('warning', 'Tovar o\'chirildi...❌' . $product->name);
 
         return redirect()->route('basket');
     }

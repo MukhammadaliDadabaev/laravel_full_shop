@@ -7,58 +7,93 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = [
-        'status',
-        'name',
-        'phone',
-        'user_id',
-    ];
+  protected $fillable = [
+    'status',
+    'name',
+    'phone',
+    'user_id',
+  ];
 
-    public function products()
-    {
-        return $this->belongsToMany(Product::class)->withPivot('count')->withTimestamps();
+  public function products()
+  {
+    return $this->belongsToMany(Product::class)->withPivot('count')->withTimestamps();
+  }
+
+  // public function skus()
+  // {
+  //     return $this->belongsToMany(Sku::class)->withPivot(['count', 'price'])->withTimestamps();
+  // }
+
+  // public function currency()
+  // {
+  //     return $this->belongsTo(Currency::class);
+  // }
+
+  // public function coupon()
+  // {
+  //     return $this->belongsTo(Coupon::class);
+  // }
+
+  public function scopeActive($query)
+  {
+    return $query->where('status', 1);
+  }
+
+  // public function user()
+  // {
+  //     return $this->belongsTo(User::class);
+  // }
+
+  public function calculateFullSum()
+  {
+    $sum = 0;
+    foreach ($this->products as $product) {
+      $sum += $product->getPriceForCount();
     }
+    return $sum;
+  }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+  public static function eraseOrderSum()
+  {
+    session()->forget('full_order_sum');
+  }
+
+  public static function changeFullSum($changeSum)
+  {
+    $sum = self::getFullSum() + $changeSum;
+    session(['full_order_sum' => $sum]);
+  }
+
+  public static function getFullSum()
+  {
+    return session('full_order_sum', 0);
+  }
+
+  public function saveOrder($name, $phone)
+  {
+    if ($this->status == 0) {
+      $this->name = $name;
+      $this->phone = $phone;
+      $this->status = 1;
+      // $this->sum = $this->getFullSum();
+
+      // $skus = $this->skus;
+      $this->save();
+      session()->forget('orderId');
+      return true;
+    } else {
+      return false;
     }
+    // foreach ($skus as $skuInOrder) {
+    //     $this->skus()->attach($skuInOrder, [
+    //         'count' => $skuInOrder->countInOrder,
+    //         'price' => $skuInOrder->price,
+    //     ]);
+    // }
 
-    public function getFullPrice()
-    {
-        $sum = 0;
-        foreach ($this->products as $product) {
-            $sum += $product->getPriceForCount();
-        }
-
-        return $sum;
-    }
-
-    public function saveOrder($name, $phone)
-    {
-        if ($this->status == 0) {
-            $this->name = $name;
-            $this->phone = $phone;
-            $this->status = 1;
-            // $this->sum = $this->getFullSum();
-
-            // $skus = $this->skus;
-            $this->save();
-            session()->forget('orderId');
-            return true;
-        } else {
-            return false;
-        }
-        // foreach ($skus as $skuInOrder) {
-        //     $this->skus()->attach($skuInOrder, [
-        //         'count' => $skuInOrder->countInOrder,
-        //         'price' => $skuInOrder->price,
-        //     ]);
-        // }
-
-        // session()->forget('order');
-        // return true;
-    }
+    // session()->forget('order');
+    // return true;
+  }
 }
