@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-  use HasFactory;
+  use HasFactory, SoftDeletes;
 
   protected $fillable = [
     'category_id',
@@ -18,7 +19,8 @@ class Product extends Model
     'price',
     'hit',
     'new',
-    'recommend'
+    'recommend',
+    'count'
   ];
 
   // public function getCategory()
@@ -39,10 +41,10 @@ class Product extends Model
     return $this->price;
   }
 
-  // public function scopeByCode($query, $code)
-  // {
-  //     return $query->where('code', $code);
-  // }
+  public function scopeByCode($query, $code)
+  {
+    return $query->where('code', $code);
+  }
 
   public function scopeHit($query)
   {
@@ -72,6 +74,11 @@ class Product extends Model
   public function setRecommendAttribute($value)
   {
     $this->attributes['recommend'] = $value === 'on' ? 1 : 0;
+  }
+
+  public function isAvailable()
+  {
+    return !$this->trashed() && $this->count > 0;
   }
 
   public function isHit()

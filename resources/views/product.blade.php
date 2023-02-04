@@ -4,21 +4,24 @@
 
 @section('content')
 
-<h1>iPhone XL</h1>
-<h2>{{ $product }}</h2>
-<h2>Мобильные телефоны</h2>
-<p>Цена: <b>20221 ₽</b></p>
+    <h1>{{ $product->name }}</h1>
+    <h2>{{ $product->category->name }}</h2>
+    <h2>Мобильные телефоны</h2>
+    <p>Цена: <b>{{ $product->price }}</b></p>
+    {{-- <h4>Цвет: Белый</h4> --}}
+    {{-- <h4>Внутренняя память: 128гб</h4> --}}
+    <img style="height: 350px" width="500px" src="{{ Storage::url($product->image) }}">
+    <p>{{ $product->description }}</p>
 
-<h4>Цвет: Белый</h4>
-<h4>Внутренняя память: 128гб</h4>
+    <form action="{{ route('basket-add', $product) }}" method="POST">
+        @csrf
+        @if ($product->isAvailable())
+            <a href="{{ route('basket-add', $product) }}" class="btn btn-success" role="button">Добавить в корзину</a>
+        @else
+            Не доступен
+        @endif
 
-{{-- <img src="{{ Storage::url($product->image) }}"> --}}
-<p>Огромный продвинутый телефон</p>
-
-<form action="{{ route('basket-add', $product) }}" method="POST">
-  @csrf
-  <button type="submit" class="btn btn-success" role="button">Добавить в корзину</button>
-</form>
+    </form>
 
 
 @endsection

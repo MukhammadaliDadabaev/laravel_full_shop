@@ -42,10 +42,10 @@ Route::middleware(['auth'])->group(function () {
 	//-------------------> AUTH-group
 	Route::group(['prefix' => 'admin'], function () {
 		//-----------------> USER admin-group
-		Route::group(['middleware' => 'is_admin'], function () {
-			Route::get('/orders', [OrderController::class, 'index'])->name('home');
-			Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
-		});
+		// Route::group(['middleware' => 'is_admin'], function () {
+		Route::get('/orders', [OrderController::class, 'index'])->name('home');
+		Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+		// });
 		//------------------> Resource
 		Route::resource('categories', CategoryController::class);
 		Route::resource('products', ProductController::class);
