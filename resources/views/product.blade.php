@@ -16,12 +16,10 @@
     <form action="{{ route('basket-add', $product) }}" method="POST">
         @csrf
         @if ($product->isAvailable())
-            <a href="{{ route('basket-add', $product) }}" class="btn btn-success" role="button">Добавить в корзину</a>
+            <button type="submit" class="btn btn-success" role="button">Добавить в корзину</button>
         @else
             Не доступен
         @endif
-
     </form>
-
 
 @endsection

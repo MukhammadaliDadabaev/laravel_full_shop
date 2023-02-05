@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Basket;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -9,106 +10,59 @@ use Illuminate\Support\Facades\Auth;
 
 class BasketController extends Controller
 {
-    public function basket()
-    {
-        $orderId = session('orderId');
+  public function basket()
+  {
+    $order = (new Basket())->getOrder();
 
-        if (!is_null($orderId)) {
-            $order = Order::findOrFail($orderId);
-        }
+    return view('basket', compact('order'));
+  }
 
-        return view('basket', compact('order'));
+  // TAVAR-OLISH
+  public function basketConfirm(Request $request)
+  {
+    if ((new Basket())->saveOrder($request->name, $request->phone)) {
+      session()->flash('success', 'Tovar olindi...👍👀');
+    } else {
+      session()->flash('warning', 'Tovar olishda xatolik...👇,большем кол-ве не дос тавар полно');
     }
 
-    // TAVAR-OLISH
-    public function basketConfirm(Request $request)
-    {
-        $orderId = session('orderId');
+    Order::eraseOrderSum();
+    return redirect()->route('index');
+  }
 
-        if (is_null($orderId)) {
-            return redirect()->route('index');
-        }
-        $order = Order::find($orderId);
-        $success = $order->saveOrder($request->name, $request->phone);
+  // Tavarni Оформить qilish
+  public function basketPlace()
+  {
+    $basket = new Basket();
+    $order = $basket->getOrder();
 
-        if ($success) {
-            session()->flash('success', 'Tovar olindi...👍👀');
-        } else {
-            session()->flash('warning', 'Tovar olishda xatolik...👇🤔');
-        }
-
-        Order::eraseOrderSum();
-
-        return redirect()->route('index');
+    if (!$basket->countAvalible()) {
+      session()->flash('warning', 'Tovar ... большем кол-ве не дос тавар полно обем');
+      return redirect()->route('basket');
     }
 
-    public function basketPlace()
-    {
-        $orderId = session('orderId');
+    return view('order', compact('order'));
+  }
 
-        if (is_null($orderId)) {
-            return redirect()->route('index');
-        }
-        $order = Order::find($orderId);
-        return view('order', compact('order'));
+  // Tavarni tekshirib korzinkaga qo'shish
+  public function basketAdd(Product $product)
+  {
+    $result = (new Basket(true))->addProduct($product);
+
+    if ($result) {
+      session()->flash('success', 'Tovar olindi...👉' . $product->name);
+    } else {
+      session()->flash('warning', 'Tovar ...👉' . $product->name . ' в большем кол-ве не дос для тавар');
     }
 
-    public function basketAdd($productId)
-    {
-        $orderId = session('orderId');
+    return redirect()->route('basket');
+  }
 
-        if (is_null($orderId)) {
-            $order = Order::create();
-            session(['orderId' => $order->id]);
-        } else {
-            $order = Order::find($orderId);
-        }
+  public function basketRemove(Product $product)
+  {
+    (new Basket())->removProduct($product);
 
-        if ($order->products->contains($productId)) {
-            $pivotRow = $order->products()->where('product_id', $productId)->first()->pivot;
-            $pivotRow->count++;
-            $pivotRow->update();
-        } else {
-            $order->products()->attach($productId);
-        }
-
-        // User olgan tovar-ni korzinaga saqlash
-        if (Auth::check()) {
-            $order->user_id = Auth::id();
-            $order->save();
-        }
-
-        $product = Product::find($productId);
-        Order::changeFullSum($product->price);
-
-        session()->flash('success', 'Tovar olindi...👉' . $product->name);
-
-        return redirect()->route('basket');
-    }
-
-    public function basketRemove($productId)
-    {
-        $orderId = session('orderId');
-        if (is_null($orderId)) {
-            return redirect()->route('basket');
-        }
-        $order = Order::find($orderId);
-
-        if ($order->products->contains($productId)) {
-            $pivotRow = $order->products()->where('product_id', $productId)->first()->pivot;
-            if ($pivotRow->count < 2) {
-                $order->products()->detach($productId);
-            } else {
-                $pivotRow->count--;
-                $pivotRow->update();
-            }
-        }
-
-        $product = Product::find($productId);
-        Order::changeFullSum(-$product->price);
-
-        session()->flash('warning', 'Tovar o\'chirildi...❌' . $product->name);
-
-        return redirect()->route('basket');
-    }
+    session()->flash('warning', 'Tovar o\'chirildi...❌' . $product->name);
+    return redirect()->route('basket');
+  }
 }

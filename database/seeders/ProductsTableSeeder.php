@@ -23,6 +23,7 @@ class ProductsTableSeeder extends Seeder
         'price' => 78700,
         'category_id' => 1,
         'image' => 'products/iphone_x.jpg',
+        'count' => rand(0, 10),
       ],
       [
         'name' => 'iPhone XL',
@@ -31,6 +32,7 @@ class ProductsTableSeeder extends Seeder
         'price' => 92400,
         'category_id' => 1,
         'image' => 'products/iphone_x_silver.jpg',
+        'count' => rand(0, 10),
       ],
       [
         'name' => 'iPhone XL 256GB',
@@ -39,6 +41,7 @@ class ProductsTableSeeder extends Seeder
         'price' => 92400,
         'category_id' => 1,
         'image' => 'products/iphone_x_silver.jpg',
+        'count' => rand(0, 10),
       ],
       [
         'name' => 'HTC One S',
@@ -47,6 +50,7 @@ class ProductsTableSeeder extends Seeder
         'price' => 933400,
         'category_id' => 2,
         'image' => 'products/htc_one_s.png',
+        'count' => rand(0, 10),
       ],
       [
         'name' => 'iPhone 5SE',
@@ -55,6 +59,7 @@ class ProductsTableSeeder extends Seeder
         'price' => 38400,
         'category_id' => 2,
         'image' => 'products/iphone_5.jpg',
+        'count' => rand(0, 10),
       ],
       [
         'name' => 'Samsung Galaxy J6',
@@ -63,6 +68,7 @@ class ProductsTableSeeder extends Seeder
         'price' => 68400,
         'category_id' => 2,
         'image' => 'products/samsung_j6.jpg',
+        'count' => rand(0, 10),
       ],
       [
         'name' => 'Наушники Beats Audio',
@@ -71,6 +77,7 @@ class ProductsTableSeeder extends Seeder
         'price' => 831400,
         'category_id' => 3,
         'image' => 'products/beats.jpg',
+        'count' => rand(0, 10),
       ],
       [
         'name' => 'Наушники Beats Audio',
@@ -79,6 +86,7 @@ class ProductsTableSeeder extends Seeder
         'price' => 812400,
         'category_id' => 3,
         'image' => 'products/beats.jpg',
+        'count' => rand(0, 10),
       ],
       [
         'name' => 'Камера GoPro',
@@ -87,14 +95,16 @@ class ProductsTableSeeder extends Seeder
         'price' => 932400,
         'category_id' => 3,
         'image' => 'products/gopro.jpg',
+        'count' => rand(0, 10),
       ],
       [
         'name' => 'Камера Panasonic HC-V770',
         'code' => 'panasonic_hc-v770',
         'description' => 'Для серьёзной видео съемки нужна серьёзная камера. Panasonic HC-V770 для этих целей лучший выбор!',
-        'price' => 972400,
+        'price' => 172400,
         'category_id' => 3,
         'image' => 'products/video_panasonic.jpg',
+        'count' => rand(0, 10),
       ],
     ]);
   }
