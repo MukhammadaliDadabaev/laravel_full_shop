@@ -4,9 +4,12 @@ namespace App\Classes;
 
 // use App\Mail\OrderCreated;
 // use App\Models\Coupon;
+
+use App\Mail\OrderCreated;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 // use App\Models\Sku;
 // use App\Services\CurrencyConversion;
@@ -69,29 +72,37 @@ class Basket
     // return true;
   }
 
-  public function countAvalible()
+  public function countAvalible($updateCount = false)
   {
     foreach ($this->order->products as $orderProduct) {
       if ($orderProduct->count < $this->getPivotRow($orderProduct)->count) {
         return false;
       }
+
+      if ($updateCount) {
+        $orderProduct->count -= $this->getPivotRow($orderProduct)->count;
+      }
+    }
+
+    if ($updateCount) {
+      $this->order->products->map->save();
     }
 
     return true;
   }
 
-  public function saveOrder($name, $phone)
+  public function saveOrder($name, $phone, $email)
   {
-    if ($this->countAvalible()) {
+    if (!$this->countAvalible(true)) {
       return false;
     }
-    return $this->order->saveOrder($name, $phone);
     // if (!$this->countAvailable(true)) {
     //     return false;
     // }
     // $this->order->saveOrder($name, $phone);
-    // Mail::to($email)->send(new OrderCreated($name, $this->getOrder()));
+    Mail::to($email)->send(new OrderCreated($name, $this->getOrder()));
     // return true;
+    return $this->order->saveOrder($name, $phone);
   }
 
   public function getPivotRow($product)
