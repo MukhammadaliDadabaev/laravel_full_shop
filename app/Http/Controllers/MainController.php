@@ -7,6 +7,7 @@ use App\Http\Requests\SubscriptionRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Subscription;
+use Illuminate\Support\Facades\App;
 
 class MainController extends Controller
 {
@@ -62,5 +63,17 @@ class MainController extends Controller
     ]);
 
     return redirect()->back()->with('success', 'product.we_will_update...😎');
+  }
+
+  public function changeLocale($locale)
+  {
+    $availableLocales = ['en', 'ru', 'uz'];
+    if (!in_array($locale, $availableLocales)) {
+      $locale = config('app.locale');
+    }
+    session(['locale' => $locale]);
+    App::setLocale($locale);
+
+    return redirect()->back();
   }
 }

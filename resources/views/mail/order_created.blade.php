@@ -1,5 +1,5 @@
 <h1>Mail o'tdi..ISMI {{ $name }}</h1>
-<h1>Tavar oldi summa..заказа: {{  $fullSum }} saqlandi.</h1>
+<h1>@lang('mail/order_created.your_order') {{  $fullSum }} saqlandi.</h1>
 
 <table>
   <tbody>
