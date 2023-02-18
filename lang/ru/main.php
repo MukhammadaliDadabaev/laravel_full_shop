@@ -9,11 +9,13 @@ return [
   'category' => 'Категория ',
   'cart' => 'В корзину',
   'reset_project' => 'Сбросить проект в начальное состояние',
-  'set_lang' => [
-    'en' => 'en',
-    'ru' => 'ru',
-    'uz' => 'uz',
-  ],
+  // 'set_lang' => [
+  //   'en' => 'en',
+  //   'ru' => 'ru',
+  //   'uz' => 'uz',
+  // ],
+  'current_lang' => 'ru',
+  'set_lang' => 'en',
   'properties' => [
     'hit' => 'Хит',
     'recommend' => 'Рекомендуем',

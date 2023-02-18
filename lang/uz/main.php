@@ -9,11 +9,13 @@ return [
   'category' => 'Toifa',
   'cart' => 'Sizning savatingiz',
   'reset_project' => 'Loyihani qayta ishga tushiring',
-  'set_lang' => [
-    'en' => 'en',
-    'ru' => 'ru',
-    'uz' => 'uz',
-  ],
+  // 'set_lang' => [
+  //   'en' => 'en',
+  //   'ru' => 'ru',
+  //   'uz' => 'uz',
+  // ],
+  'current_lang' => 'uz',
+  'set_lang' => 'en',
   'properties' => [
     'hit' => 'Hit',
     'recommend' => 'Recommend',

@@ -21,15 +21,15 @@
       </tr>
       <tr>
         <td>Название en</td>
-        <td>Mobile phones</td>
+        <td>{{ $category->name_en }}</td>
       </tr>
       <tr>
         <td>Описание</td>
-        <td>В этом разделе вы найдёте самые популярные мобильные телефонамы по отличным ценам!</td>
+        <td>{{ $category->description }}</td>
       </tr>
       <tr>
         <td>Описание en</td>
-        <td>Mobile phones section with best prices for best popular phones!</td>
+        <td>{{ $category->description_en }}</td>
       </tr>
       <tr>
         <td>Картинка</td>

@@ -9,11 +9,13 @@ return [
   'category' => 'Category ',
   'cart' => 'Your cart',
   'reset_project' => 'Reset project to default state',
-  'set_lang' => [
-    'en' => 'en',
-    'ru' => 'ru',
-    'uz' => 'uz',
-  ],
+  // 'set_lang' => [
+  //   'en' => 'en',
+  //   'ru' => 'ru',
+  //   'uz' => 'uz',
+  // ],
+  'current_lang' => 'en',
+  'set_lang' => 'ru',
   'properties' => [
     'hit' => 'Hit',
     'recommend' => 'Recommend',

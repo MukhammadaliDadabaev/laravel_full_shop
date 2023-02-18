@@ -26,24 +26,24 @@
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li @route_active('index')><a href="{{ route('index') }}">@lang('main.online_shop')</a></li>
-          <li @route_active('categor*')><a href="{{ route('categories') }}">Категории</a>
+          <li @route_active('categor*')><a href="{{ route('categories') }}">@lang('main.categories')</a>
           </li>
-          <li @route_active('basket*')><a href="{{ route('basket') }}">В корзину</a></li>
-          <li><a href="{{ route('reset') }}">Сбросить проект в начальное состояние</a></li>
+          <li @route_active('basket*')><a href="{{ route('basket') }}">@lang('main.cart')</a></li>
+          <li><a href="{{ route('reset') }}">@lang('main.reset_project')</a></li>
           @guest
-          <li><a href="{{ route('login') }}">Войти</a></li>
+          <li><a href="{{ route('login') }}">@lang('main.login')</a></li>
           @endguest
 
           @auth
           {{-- @admin('admin') --}}
-            <li><a href="{{ route('home') }}">Администратор</a></li>
+            <li><a href="{{ route('home') }}">@lang('main.admin_panel')</a></li>
           {{-- @else --}}
-          <li><a href="{{ route('person.orders.index') }}">Мои закази</a></li>
+          <li><a href="{{ route('person.orders.index') }}">@lang('main.my_orders')</a></li>
           {{-- @endadmin --}}
 
-          <li><a href="{{ route('get-logout') }}">Выйти</a></li>
+          <li><a href="{{ route('get-logout') }}">@lang('main.logout')</a></li>
           @endauth
-          <li><a href="{{ route('locale',__('main.set_lang.uz') ) }}">@lang('main.set_lang.uz')</a></li>
+          <li><a href="{{ route('locale',__('main.set_lang') ) }}">@lang('main.set_lang')</a></li>
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">₽<span class="caret"></span></a>
