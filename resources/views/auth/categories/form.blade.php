@@ -62,7 +62,7 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     <textarea name="description" id="description" cols="72" rows="5">
-@isset($category)
+                      @isset($category)
 {{ $category->description }}
 @endisset
 </textarea>

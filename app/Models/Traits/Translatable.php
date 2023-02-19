@@ -7,7 +7,7 @@ use LogicException;
 
 trait Translatable
 {
-  protected $defaultLocale = 'uz';
+  protected $defaultLocale = 'ru';
 
   public function __($originFieldName)
   {
@@ -18,8 +18,6 @@ trait Translatable
     } else {
       $fieldName = $originFieldName;
     }
-
-    // dd($fieldName);
 
     $attributes = array_keys($this->attributes);
 

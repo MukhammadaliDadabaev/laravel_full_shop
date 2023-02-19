@@ -15,9 +15,9 @@
         <img class="mt-2" src="{{ Storage::url($product->image) }}" alt="{{ $product->__('name') }}">
         <div class="caption">
             <h3>{{ $product->__('name') }}</h3>
-            <h4>Цвет: Белый</h4>
-            <h4>Внутренняя память: 32гб</h4>
-            <p>{{ $product->price }}</p>
+            {{-- <h4>Цвет: Белый</h4>
+            <h4>Внутренняя память: 32гб</h4> --}}
+            <p>{{ $product->price }} @lang('main.rub')</p>
             <p>
             <form action="{{ route('basket-add', $product) }}" method="POST">
                 @csrf
