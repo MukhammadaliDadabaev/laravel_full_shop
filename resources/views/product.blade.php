@@ -7,7 +7,7 @@
     <h1>{{ $product->__('name') }}</h1>
     <h2>{{ $product->category->name }}</h2>
     <h2>Мобильные телефоны</h2>
-    <p>Цена: <b>{{ $product->price }}</b></p>
+    <p>Цена: <b>{{ $product->price }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</b></p>
     {{-- <h4>Цвет: Белый</h4> --}}
     {{-- <h4>Внутренняя память: 128гб</h4> --}}
     <img style="height: 350px" width="500px" src="{{ Storage::url($product->image) }}">

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\Translatable;
+use App\Services\CurrencyConversion;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -98,4 +99,15 @@ class Product extends Model
   {
     return $this->recommend === 1;
   }
+
+  // MONEY FUNC
+  public function getPriceAttribute($value)
+  {
+    return CurrencyConversion::convert($value);
+  }
+
+  // public function getCurrentAttribute()
+  // {
+  //   return session('currency', 'UZB');
+  // }
 }
